@@ -719,36 +719,8 @@
     border-radius: 3px;
     padding: 6px 6px 6px 20px;
   }
-  .news__field input {
-    flex: 1;
-    background: none;
-    border: none;
-    outline: none;
-    color: var(--paper);
-    font-family: var(--font-sans);
-    font-size: 15px;
-    min-width: 0;
-    padding: 0;
-  }
-  .news__field input::placeholder {
-    color: color-mix(in oklch, var(--paper) 60%, transparent);
-  }
-  .news__field button {
-    background: var(--paper);
-    color: var(--ink);
-    border: none;
-    border-radius: 3px;
-    padding: 11px 22px;
-    font-family: var(--font-sans);
-    font-weight: 700;
-    font-size: 14.5px;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: transform 0.2s;
-  }
-  .news__field button:hover {
-    transform: translateX(2px);
-  }
+  /* the email <Input> and submit <Button> are shadcn/ui primitives,
+     styled to the Noir look via utility classes in newsletter.tsx */
   .news__note {
     font-family: var(--font-mono);
     font-size: 11.5px;
