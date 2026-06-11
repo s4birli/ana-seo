@@ -8,11 +8,6 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
   },
-  // Inline the (tiny) CSS into the document head — removes the render-blocking
-  // stylesheet request, improving FCP/LCP.
-  experimental: {
-    inlineCss: true,
-  },
   poweredByHeader: false,
 };
 
