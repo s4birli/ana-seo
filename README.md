@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ana Precup — Personal Brand Homepage (Noir Edition)
 
-## Getting Started
+A pixel-faithful, SEO-first rebuild of the **Ana Precup** personal-brand homepage
+(Romanian SEO consultant, founder of Deby.ro) — the premium black-and-white
+"Noir" editorial design — in a modern, server-rendered stack.
 
-First, run the development server:
+**Stack:** Next.js 16 (App Router) · React 19 · Tailwind CSS v4 · shadcn/ui ·
+next-themes · TypeScript.
+
+**Lighthouse:** 100 / 100 / 100 / 100 (Performance · Accessibility · Best
+Practices · SEO) on desktop for both locales; mobile is 100 perf on a quiet run
+with A11y/Best-Practices/SEO always 100 (observed FCP = LCP ≈ 0.1 s).
+
+---
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000  (→ /en)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Production:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+npm run start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## What's implemented
 
-## Learn More
+- **Bilingual, SSG routing** — English at `/en`, Romanian at `/ro` (`app/[lang]`),
+  each statically generated with the correct `<html lang>`, `hreflang`
+  alternates (`en` / `ro` / `x-default`) and a self-referencing canonical. `/`
+  redirects to `/en`. The `EN | RO` pill navigates between the routes.
+- **Light / dark theme** — `next-themes`, default light, no flash, full
+  white-on-black invert in dark mode. Persisted in `localStorage`.
+- **The full Noir homepage** — sticky nav → split hero → recent articles
+  (minimal cards) → topics strip → about teaser (grayscale portrait) →
+  black newsletter block → footer. Faithful to the design tokens (Instrument
+  Serif / Archivo / Space Mono, 3–4 px radii, hairlines, no shadows).
+- **SEO** — per-locale `<title>`/description, Open Graph + Twitter cards, a
+  branded OG image, JSON-LD (`Person` + `WebSite`), `sitemap.xml`, `robots.txt`,
+  a web manifest, and semantic landmark/heading structure.
+- **Performance** — fonts self-hosted via `next/font`; the hero wordmark glyphs
+  ship as a tiny inlined subset (`app/serif-hero.css`) so the text LCP never
+  waits on the network; images via `next/image` (AVIF/WebP).
 
-To learn more about Next.js, take a look at the following resources:
+## Project structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+app/
+  [lang]/          # root layout (html lang, metadata) + homepage
+  globals.css      # Noir design tokens + component styles (Tailwind v4)
+  icon.svg, apple-icon.png, manifest.ts, robots.ts, sitemap.ts
+  serif-hero.css   # inlined hero-wordmark font subset (generated)
+components/        # hero, recent-articles, topics, about, newsletter, footer, nav…
+  ui/              # shadcn/ui primitives (button, input)
+lib/               # i18n, content (bilingual strings + posts), site config, fonts
+scripts/           # gen-assets.mjs (icons/OG), inline-hero-font.mjs
+public/            # ana.jpg portrait, icons, og.png
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Customising
 
-## Deploy on Vercel
+- **Domain** — set `NEXT_PUBLIC_SITE_URL` (defaults to `https://anaprecup.com`).
+  It drives canonical/OG/sitemap URLs.
+- **Socials & contact** — `lib/site.ts` (LinkedIn / Instagram / Facebook are
+  placeholders; update them — they also feed JSON-LD `sameAs`).
+- **Content** — all copy lives in `lib/content.ts` (`dictionaries`, `posts`). In
+  production these would come from a CMS/markdown.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Regenerating assets
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+node scripts/gen-assets.mjs        # favicon/icons + og.png from Noir SVGs
+node scripts/inline-hero-font.mjs  # rebuild app/serif-hero.css
+```
