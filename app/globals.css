@@ -383,7 +383,64 @@
     border-color: var(--ink);
   }
   .latest__media {
+    position: relative;
     aspect-ratio: 16 / 10;
+    overflow: hidden;
+  }
+  /* featured "latest post" cover — rendered in CSS (no image request, crisp at
+     any resolution). Fixed Noir colours so it reads as a constant dark cover in
+     both themes, like a photo. */
+  .latest__cover {
+    position: absolute;
+    inset: 0;
+    background: #0d0d0c;
+    color: #f4f4f1;
+    display: flex;
+    align-items: center;
+    padding: clamp(22px, 4.5vw, 40px);
+  }
+  .latest__cover::after {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border: 1px solid #232322;
+    pointer-events: none;
+  }
+  .cv-title {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(38px, 5.4vw, 64px);
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+  .cv-title em {
+    font-style: italic;
+  }
+  .cv-eyebrow,
+  .cv-foot {
+    position: absolute;
+    left: clamp(22px, 4.5vw, 40px);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #8a8a85;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .cv-eyebrow {
+    top: clamp(22px, 4.5vw, 38px);
+  }
+  .cv-eyebrow::before {
+    content: "";
+    width: 22px;
+    height: 1px;
+    background: #f4f4f1;
+  }
+  .cv-foot {
+    bottom: clamp(22px, 4.5vw, 38px);
+    letter-spacing: 0.14em;
   }
   .latest__body {
     padding: 22px 24px 26px;
@@ -537,9 +594,14 @@
     overflow: hidden;
   }
 
-  /* topics / pillars card variant */
-  .pillar__title {
-    font-size: clamp(24px, 2.6vw, 30px);
+  /* topics cards: equal height with the CTA pinned to the bottom so all three
+     "label ->" links share a baseline regardless of description line count */
+  .section--alt .grid .card {
+    height: 100%;
+  }
+  .section--alt .grid .card .latest__more {
+    margin-top: auto;
+    padding-top: 14px;
   }
 
   /* ---------- PLACEHOLDER MEDIA (fine monochrome hatch) ---------- */
@@ -568,10 +630,12 @@
     border-radius: 3px;
     border: 1px solid var(--line);
   }
-  .latest__media .ph {
+  .latest__media .ph,
+  .latest__cover {
     transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
   }
-  .latest:hover .latest__media .ph {
+  .latest:hover .latest__media .ph,
+  .latest:hover .latest__cover {
     transform: scale(1.045);
   }
 
@@ -714,8 +778,8 @@
   .news__field {
     display: flex;
     gap: 10px;
-    background: color-mix(in oklch, var(--paper) 13%, transparent);
-    border: 1px solid color-mix(in oklch, var(--paper) 35%, transparent);
+    background: color-mix(in oklch, var(--ink) 86%, var(--paper));
+    border: 1px solid color-mix(in oklch, var(--paper) 30%, transparent);
     border-radius: 3px;
     padding: 6px 6px 6px 20px;
   }
@@ -865,6 +929,14 @@
     }
     .latest__media {
       aspect-ratio: 16 / 10;
+    }
+    /* stack the newsletter field so the (longer) Romanian button never
+       squeezes / clips the email placeholder */
+    .news__field {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+      padding: 12px;
     }
   }
 }

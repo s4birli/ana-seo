@@ -38,7 +38,7 @@ export function Newsletter({ dict }: { dict: Dictionary }) {
                     required
                     placeholder={s.placeholder}
                     aria-label={s.placeholder}
-                    className="h-auto min-w-0 flex-1 rounded-none border-0 bg-transparent p-0 text-[15px] text-paper shadow-none placeholder:text-[color-mix(in_oklch,var(--paper)_60%,transparent)] focus-visible:border-0 focus-visible:ring-0"
+                    className="h-auto min-w-0 flex-1 rounded-none border-0 bg-transparent p-0 text-[15px] text-paper shadow-none placeholder:text-[color-mix(in_oklch,var(--paper)_55%,transparent)] focus-visible:border-0 focus-visible:ring-0 dark:bg-transparent"
                   />
                   <Button
                     type="submit"

@@ -22,7 +22,7 @@ export function Topics({ dict }: { dict: Dictionary }) {
               </div>
               <h3 className="card__title">{p.name}</h3>
               <p className="card__excerpt">{p.desc}</p>
-              <span className="latest__more" style={{ marginTop: 14 }}>
+              <span className="latest__more">
                 {p.label} <ArrowIcon size={14} />
               </span>
             </a>

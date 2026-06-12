@@ -12,7 +12,7 @@ import {
   ogLocale,
   type Lang,
 } from "@/lib/i18n";
-import { seo, site, siteUrl } from "@/lib/site";
+import { seo, site, siteUrl, verification } from "@/lib/site";
 
 type LayoutParams = { params: Promise<{ lang: string }> };
 
@@ -104,6 +104,10 @@ export async function generateMetadata({ params }: LayoutParams): Promise<Metada
         "max-snippet": -1,
         "max-video-preview": -1,
       },
+    },
+    verification: {
+      google: verification.google,
+      ...(verification.bing ? { other: { "msvalidate.01": verification.bing } } : {}),
     },
     formatDetection: { telephone: false },
   };

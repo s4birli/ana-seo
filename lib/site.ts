@@ -8,6 +8,15 @@ export const siteUrl = (
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://anaprecup.com"
 ).replace(/\/$/, "");
 
+/**
+ * Search-engine ownership verification. Set these env vars (e.g. in .env.local
+ * or your host) to emit the verification <meta> tags for Search Console / Bing.
+ */
+export const verification = {
+  google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  bing: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION,
+};
+
 export const site = {
   name: "Ana Precup",
   brand: { first: "Ana", last: "Precup" },

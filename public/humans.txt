@@ -1,0 +1,10 @@
+/* TEAM */
+Name: Ana Precup
+Role: SEO Consultant & Blogger
+Site: https://anaprecup.com
+Location: Cluj, Romania
+
+/* SITE */
+Language: English / Română
+Standards: HTML5, CSS3
+Components: Next.js, React, Tailwind CSS, shadcn/ui

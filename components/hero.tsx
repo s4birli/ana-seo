@@ -1,6 +1,5 @@
 import type { Dictionary } from "@/lib/content";
 import { ArrowIcon } from "@/components/icons";
-import { Placeholder } from "@/components/placeholder";
 
 export function Hero({ dict }: { dict: Dictionary }) {
   const s = dict.hero;
@@ -32,7 +31,13 @@ export function Hero({ dict }: { dict: Dictionary }) {
         <a className="latest" href="#blog">
           <div className="latest__inner">
             <div className="latest__media">
-              <Placeholder label={L.ph} />
+              <div className="latest__cover" aria-hidden="true">
+                <span className="cv-eyebrow">Latest in Search</span>
+                <span className="cv-title">
+                  AI <em>Search</em>
+                </span>
+                <span className="cv-foot">// 2026 Field Guide</span>
+              </div>
             </div>
             <div className="latest__body">
               <p className="latest__flag">{s.latestFlag}</p>
